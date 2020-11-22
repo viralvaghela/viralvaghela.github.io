@@ -1,3 +1,2 @@
 # Personal Portfolio ⚡️ 
-> A clean, beautiful, responsive portfolio template for Software Developers!
-[http://viralvahgela.github.io](http://viralvahgela.github.io)
+ A clean, beautiful, responsive portfolio [viralvaghela.github.io](https://viralvaghela.github.io) 
