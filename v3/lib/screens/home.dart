@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Text(
-              'John Doe',
+              'Viral Vaghela',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

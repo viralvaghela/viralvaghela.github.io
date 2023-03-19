@@ -14,7 +14,7 @@ class Portfolio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Portfolio',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -40,9 +40,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   bool _isDarkMode = false;
   final List<Widget> _screens = [
     const HomeScreen(),
+    const ProjectScreen(),
     const WorkExperienceScreen(),
     const EducationScreen(),
-    const ProjectScreen(),
   ];
   void _toggleDarkMode() {
     setState(() {
@@ -56,16 +56,6 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          actions: [
-            IconButton(
-              icon: Icon(_isDarkMode ? Icons.light_mode : Icons.dark_mode),
-              onPressed: _toggleDarkMode,
-            ),
-          ],
-        ),
         body: IndexedStack(index: currentMenuIndex, children: _screens),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {

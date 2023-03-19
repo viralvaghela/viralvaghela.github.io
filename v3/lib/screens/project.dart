@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/config.dart';
 
 class ProjectScreen extends StatelessWidget {
   const ProjectScreen({Key? key}) : super(key: key);
@@ -6,16 +7,13 @@ class ProjectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Projects'),
-      ),
       body: ListView(
         children: const [
           ProjectCard(
             title: 'Project 1',
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac magna in tortor vestibulum mollis sit amet vel nisi.',
-            imageUrl: 'https://example.com/project-1.jpg',
+            imageUrl: profileImage,
             projectUrl: 'https://example.com/project-1',
           ),
           SizedBox(height: 20),
@@ -23,7 +21,7 @@ class ProjectScreen extends StatelessWidget {
             title: 'Project 2',
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac magna in tortor vestibulum mollis sit amet vel nisi.',
-            imageUrl: 'https://example.com/project-2.jpg',
+            imageUrl: profileImage,
             projectUrl: 'https://example.com/project-2',
           ),
           SizedBox(height: 20),
@@ -31,7 +29,7 @@ class ProjectScreen extends StatelessWidget {
             title: 'Project 3',
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac magna in tortor vestibulum mollis sit amet vel nisi.',
-            imageUrl: 'https://example.com/project-3.jpg',
+            imageUrl: profileImage,
             projectUrl: 'https://example.com/project-3',
           ),
         ],
