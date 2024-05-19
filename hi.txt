@@ -1,0 +1,9 @@
++-----------------------------------------------------------------+
+|   Hey there! I'm Viral Vaghela, a Security Researcher, Programmer and Tech Geek. I am passionate about cybersecurity, bug bounty hunting, programming, and mobile app development. Recognized by Cambridge University, Vodafone, Airtel, GTU, and many other organizations. I conduct VAPT, red team exercises, and create tech content for over 100K+ students on Instagram.    |
++-----------------------------------------------------------------+
+| Twitter: https://twitter.com/viral_vaghela                      |
+| LinkedIn: https://www.linkedin.com/in/viralv/                   |
+| Portfolio:  https://viralvaghela.com                            |
+| GitHub:  https://github.com/viralvaghela                        |
+| Email:  mailto:viralvaghela7109@gmail.com                       |
++-----------------------------------------------------------------+
