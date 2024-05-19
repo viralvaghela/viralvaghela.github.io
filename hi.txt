@@ -3,7 +3,7 @@ Hey there! I'm Viral Vaghela, a Security Researcher, Programmer
 and Tech Geek. I am passionate about cybersecurity, bug bounty
 hunting, programming, and mobile app development.               
 +-----------------------------------------------------------------+
-| Twitter:   https://twitter.com/viral_vaghela                    |
+| Twitter:   https://twitter.com/viral_vaghela_                   |
 | LinkedIn:  https://www.linkedin.com/in/viralv/                  |
 | Portfolio: https://viralvaghela.com                             |
 | Instagram: https://instagram.com/viral_codes                    |
