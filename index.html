@@ -1,1315 +1,1494 @@
-
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="AI-generated website">
-      <meta name="theme-color" content="#ffffff">
-      
-      <!-- Performance optimization: Load critical CSS first -->
-      <link rel="preload" href="https://cdn.tailwindcss.com" as="style">
-      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
-      
-      <!-- Core CSS -->
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: '#3B82F6',
-                secondary: '#10B981',
-                accent: '#8B5CF6',
-              },
-              fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
-                heading: ['Inter', 'system-ui', 'sans-serif'],
-              },
-              animation: {
-                'fade-in': 'fadeIn 0.5s ease-in',
-                'slide-up': 'slideUp 0.5s ease-out',
-              },
-            },
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Viral Vaghela - Security Researcher, Software Developer, and Tech Geek. Explore my projects, skills, and achievements.">
+  <meta name="theme-color" content="#3B82F6">
+  <meta name="keywords"
+    content="Viral Vaghela, Security Researcher, Software Developer, Tech Geek, Projects, Skills, Achievements">
+  <meta name="author" content="Viral Vaghela">
+  <link rel="canonical" href="https://viralvaghela.com">
+
+  <!-- Performance optimization: Load critical CSS first -->
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    as="style">
+
+  <!-- Core CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            accent: '#8B5CF6',
           },
-          variants: {
-            extend: {
-              opacity: ['group-hover'],
-              transform: ['group-hover'],
-              scale: ['group-hover'],
-            },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            heading: ['Inter', 'system-ui', 'sans-serif'],
           },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in',
+            'slide-up': 'slideUp 0.5s ease-out',
+          },
+        },
+      },
+      variants: {
+        extend: {
+          opacity: ['group-hover'],
+          transform: ['group-hover'],
+          scale: ['group-hover'],
+        },
+      },
+    }
+  </script>
+
+  <!-- Utilities and Components -->
+  <script defer src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script defer src="https://preline.co/assets/vendor/preline/dist/index.js"></script>
+
+  <!-- Optimized Font Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons - Load async -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+
+  <!-- Minimal Animation CSS -->
+  <style>
+    /* Core Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Section Padding */
+    section {
+      padding: clamp(2rem, 5vw, 6.25rem) 0;
+      scroll-margin-top: 5rem;
+    }
+
+    /* Performance Optimizations */
+    img {
+      content-visibility: auto;
+      contain: content;
+    }
+
+    /* Core Layout Classes */
+    .container {
+      width: min(100% - 2rem, 75rem);
+      margin-inline: auto;
+    }
+
+    /* Responsive Typography */
+    :root {
+      --fluid-min-width: 320;
+      --fluid-max-width: 1140;
+      --fluid-min-size: 16;
+      --fluid-max-size: 18;
+      --fluid-min-scale: 1.2;
+      --fluid-max-scale: 1.333;
+    }
+
+    /* Add smooth scrolling only if user hasn't requested reduced motion */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+  </style>
+
+  <!-- Enhanced Image Handler -->
+  <script>
+    // Lazy loading and error handling for images
+    document.addEventListener('DOMContentLoaded', () => {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              observer.unobserve(img);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px 0px',
+        threshold: 0.01
+      });
+
+      const loadImage = (img) => {
+        if ('loading' in HTMLImageElement.prototype) {
+          img.loading = 'lazy';
         }
-      </script>
 
-      <!-- Utilities and Components -->
-      <script defer src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-      <script defer src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-      <script defer src="https://preline.co/assets/vendor/preline/dist/index.js"></script>
-      
-      <!-- Optimized Font Loading -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-      
-      <!-- Icons - Load async -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
-            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+        // Enhanced error handling
+        img.onerror = () => {
+          const width = img.getAttribute('width') || img.clientWidth || 300;
+          const height = img.getAttribute('height') || img.clientHeight || 200;
+          img.src = `https://placehold.co/${width}x${height}/DEDEDE/555555?text=Image+Unavailable`;
+          img.alt = 'Image unavailable';
+          img.classList.add('error-image');
+        };
 
-      <!-- Minimal Animation CSS -->
+        if (img.dataset.src) {
+          imageObserver.observe(img);
+        }
+      };
+
+      // Process existing images
+      document.querySelectorAll('img[data-src]').forEach(loadImage);
+
+      // Watch for new images
+      new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeType === 1 && node.tagName === 'IMG') {
+              loadImage(node);
+            }
+            if (node.nodeType === 1) {
+              node.querySelectorAll('img[data-src]').forEach(loadImage);
+            }
+          });
+        });
+      }).observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    });
+
+    // Performance monitoring
+    if ('performance' in window) {
+      window.addEventListener('load', () => {
+        const timing = performance.getEntriesByType('navigation')[0];
+        console.log(`Page load time: ${timing.loadEventEnd - timing.navigationStart}ms`);
+      });
+    }
+  </script>
+</head>
+
+<body class="antialiased leading-normal text-gray-900 bg-white dark:bg-gray-900 dark:text-white">
+  <div id="page-wrapper" class="">
+    <main class="">
+      <!-- Content will be injected here -->
+    </main>
+  </div>
+</body>
+
+</html>
+<element id="8bb79062-1d74-4cc9-8f1e-1bb62610211e" data-section-id="8bb79062-1d74-4cc9-8f1e-1bb62610211e">
+
+  <htmlCode>
+    <!--- Tailwind Config --->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                200: '#bae6fd',
+                300: '#7dd3fc',
+                400: '#38bdf8',
+                500: '#0ea5e9',
+                600: '#0284c7',
+                700: '#0369a1',
+                800: '#075985',
+                900: '#0c4a6e',
+              },
+            },
+            animation: {
+              'fade-in': 'fadeIn 1s ease-in',
+              'slide-up': 'slideUp 0.5s ease-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+
+    <div id="root">
+      <!-- Navbar -->
+      <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+              <a href="#" class="text-white font-bold text-xl">Viral Vaghela</a>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline space-x-4">
+                <a href="#aboutme"
+                  class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">About</a>
+                <a href="#work_experience"
+                  class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Experience</a>
+                <a href="#projects"
+                  class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Projects</a>
+                <a href="#skills"
+                  class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Skills</a>
+                <a href="#education"
+                  class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Education</a>
+                <a href="#contact"
+                  class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <div class="relative bg-gray-900 h-screen">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900"></div>
+
+        <div class="relative max-w-7xl mx-auto pt-32 px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div class="text-center sm:text-left animate-fade-in">
+            <h1 class="text-4xl sm:text-6xl font-bold text-white mb-6">
+              <span class="block">Security Researcher &</span>
+              <span class="block text-primary-400">Software Developer</span>
+            </h1>
+
+            <p class="mt-3 text-lg sm:text-xl text-gray-300 max-w-2xl animate-slide-up">
+              Tech Geek 💻 | Penetration Tester 🕵️‍♀️ | Security Researcher | Software developer 🚀
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-4 justify-center sm:justify-start">
+              <a href="#contact"
+                class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition md:text-lg">
+                <span class="text-primary-400">Get In Touch</span>
+              </a>
+              <a href="#projects"
+                class="px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-primary-400 hover:bg-gray-800 transition md:text-lg">
+                View Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </htmlCode>
+</element>
+<element id="a4bcbf29-c4c9-40ba-b5d5-81c93ed36fe9" data-section-id="a4bcbf29-c4c9-40ba-b5d5-81c93ed36fe9">
+
+  <htmlCode>
+    <div id="root">
+      <section id="aboutme" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+            <div class="relative">
+              <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-8">
+                About Me
+              </h2>
+              <div class="mt-3 text-lg text-gray-300 space-y-6">
+                <p class="animate-fade-in">
+                  Hi 👋, My name is Viral Vaghela, Offensive Security Researcher at Zscaler, programmer and mobile app
+                  developer from India
+                </p>
+
+                <div class="p-4 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700 animate-slide-up">
+                  <p>
+                    Acknowledged By Cambridge University, Vodafone, Airtel, GTU and 30+ organizations. You can checkout
+                    my openbugbounty profile
+                    <a href="https://www.openbugbounty.org/researchers/Codingboy"
+                      class="text-primary-400 hover:text-primary-300 transition">CodingBoy</a>
+                  </p>
+                </div>
+
+                <p class="animate-fade-in">
+                  I am also creating content about Tech, Programming, and Security on my Instagram page
+                  <a href="https://instagram.com/viral_codes"
+                    class="text-primary-400 hover:text-primary-300 transition">@viral_codes</a>
+                  and helping more than <strong class="text-white">100K+ students.</strong>
+                </p>
+              </div>
+
+              <div class="mt-10 flex gap-4">
+                <div class="text-center p-4 bg-gray-800/30 rounded-lg border border-gray-700">
+                  <div class="text-3xl font-bold text-primary-400">30+</div>
+                  <div class="text-sm text-gray-400">Organizations</div>
+                </div>
+                <div class="text-center p-4 bg-gray-800/30 rounded-lg border border-gray-700">
+                  <div class="text-3xl font-bold text-primary-400">100K+</div>
+                  <div class="text-sm text-gray-400">Students</div>
+                </div>
+                <div class="text-center p-4 bg-gray-800/30 rounded-lg border border-gray-700">
+                  <div class="text-3xl font-bold text-primary-400">5+</div>
+                  <div class="text-sm text-gray-400">Years Experience</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-12 lg:mt-0">
+              <div class="space-y-6 bg-gray-800/30 p-8 rounded-xl border border-gray-700">
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-medium text-white">Security Research</h3>
+                    <p class="text-gray-400">Specialized in vulnerability assessment and penetration testing</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-medium text-white">Development</h3>
+                    <p class="text-gray-400">Mobile app development and open source contributions</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-medium text-white">Content Creation</h3>
+                    <p class="text-gray-400">Tech education and security awareness content</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </htmlCode>
+</element>
+<element id="c9dac189-d1cd-4ba2-9b54-bb1fc46b7726" data-section-id="c9dac189-d1cd-4ba2-9b54-bb1fc46b7726">
+
+  <htmlCode>
+    <div id="root">
+      <section id="work_experience" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
+            Work Experience
+          </h2>
+
+          <div class="space-y-16">
+            <!-- Zscaler -->
+            <div class="relative pl-8 sm:pl-32 py-6 group">
+              <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
+                <div class="flex items-center mb-4 sm:mb-0">
+                  <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
+                  <span class="text-primary-400 font-semibold">Jan 2024 - Present</span>
+                </div>
+                <div class="sm:ml-28">
+                  <h3 class="text-xl font-bold text-white mb-2">Security Researcher at Zscaler</h3>
+                  <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+                    <ul class="space-y-4 text-gray-300">
+                      <li class="flex items-start">
+                        <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Conducted Vulnerability Assessment and Penetration Testing (VAPT) on Web applications,
+                          APIs, and hosts</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Executed red team exercises, including Phishing and social engineering attacks</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Engaged in security research activities and product analysis</span>
+                      </li>
+                    </ul>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Offensive Security</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Red Team</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">AWS</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Infra Testing</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bug Bounty Hunter -->
+            <div class="relative pl-8 sm:pl-32 py-6 group">
+              <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
+                <div class="flex items-center mb-4 sm:mb-0">
+                  <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
+                  <span class="text-primary-400 font-semibold">2022 - 2024</span>
+                </div>
+                <div class="sm:ml-28">
+                  <h3 class="text-xl font-bold text-white mb-2">Bug Bounty Hunter</h3>
+                  <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+                    <p class="text-gray-300 mb-4">Acknowledged By Cambridge University, and found security
+                      vulnerabilities in Vodafone, Airtel, LeetCode, Shine, GTU and many other organizations</p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">VAPT</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">SAST</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">DAPT</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Mobile Testing</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Web Testing</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">API Testing</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finlegal Internship -->
+            <div class="relative pl-8 sm:pl-32 py-6 group">
+              <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
+                <div class="flex items-center mb-4 sm:mb-0">
+                  <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
+                  <span class="text-primary-400 font-semibold">Sept 2022 - Dec 2022</span>
+                </div>
+                <div class="sm:ml-28">
+                  <h3 class="text-xl font-bold text-white mb-2">Security Engineering Intern at Finlegal Pune</h3>
+                  <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+                    <ul class="space-y-4 text-gray-300">
+                      <li class="flex items-start">
+                        <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Testing and finding security vulnerabilities in in-house products</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Using Burp suite, Owasp Zap, SQL Map and other tools for pentesting</span>
+                      </li>
+                    </ul>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Vulnerability
+                        Assessment</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Web Application
+                        Security</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Penetration Testing</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Microsoft Internship -->
+            <div class="relative pl-8 sm:pl-32 py-6 group">
+              <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
+                <div class="flex items-center mb-4 sm:mb-0">
+                  <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
+                  <span class="text-primary-400 font-semibold">Oct 2021 - Dec 2021</span>
+                </div>
+                <div class="sm:ml-28">
+                  <h3 class="text-xl font-bold text-white mb-2">Future Ready Talent Virtual Internship Microsoft</h3>
+                  <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+                    <p class="text-gray-300 mb-4">Learned about Microsoft Cloud Platform, Azure's Fundamentals, and
+                      Administration. Data Analysis, AI Fundamentals.</p>
+                    <div class="mt-4">
+                      <h4 class="text-white font-semibold mb-2">Project: Book Store Web Application</h4>
+                      <ul class="space-y-2 text-gray-300">
+                        <li>• Search and find books and place orders</li>
+                        <li>• Admin dashboard with CRUD operations</li>
+                        <li>• User tracking and record management</li>
+                      </ul>
+                      <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">HTML</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">CSS</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">JavaScript</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">PHP</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Azure</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">MySQL</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </htmlCode>
+</element>
+<element id="86ed8e2e-0d88-4119-b9aa-487c36b471d7" data-section-id="86ed8e2e-0d88-4119-b9aa-487c36b471d7">
+
+  <htmlCode>
+    <div id="root">
+      <section id="projects" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
+            Featured Projects
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Flutter Insta -->
+            <div
+              class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-bold text-white">Flutter Insta Package</h3>
+                <a href="https://pub.dev/packages/flutter_insta" class="text-primary-400 hover:text-primary-300">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <p class="mt-4 text-gray-300">Get Instagram user's details such as profile picture URL, followers count,
+                following count, bio, and download reels video.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Flutter</span>
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Dart</span>
+              </div>
+              <div class="mt-4 text-primary-400">140+ Likes & 84% popularity on pub.dev</div>
+              <a href="https://github.com/viralvaghela/flutter_insta"
+                class="mt-4 inline-flex items-center text-sm text-primary-400 hover:text-primary-300">
+                View Source Code
+                <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Cyber Cop -->
+            <div
+              class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-bold text-white">Cyber Cop</h3>
+                <a href="https://play.google.com/store/apps/details?id=com.tools.cybercop"
+                  class="text-primary-400 hover:text-primary-300">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <p class="mt-4 text-gray-300">Mobile App for Cyber Crime Investigation. Get device info, location
+                tracking, and dark web data analysis.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Flutter</span>
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">PHP</span>
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">AWS</span>
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Firebase</span>
+              </div>
+            </div>
+
+            <!-- Secret Finder -->
+            <div
+              class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-bold text-white">Secret Finder</h3>
+                <a href="https://github.com/viralvaghela/secret-finder" class="text-primary-400 hover:text-primary-300">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <p class="mt-4 text-gray-300">Python tool for identifying hard-coded API secrets, tokens, and sensitive
+                information in Android app files.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Python</span>
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Security</span>
+              </div>
+              <a href="https://github.com/viralvaghela/secret-finder"
+                class="mt-4 inline-flex items-center text-sm text-primary-400 hover:text-primary-300">
+                View Source Code
+                <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Netguard -->
+            <div
+              class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-bold text-white">Netguard</h3>
+                <a href="https://github.com/viralvaghela/netguard" class="text-primary-400 hover:text-primary-300">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <p class="mt-4 text-gray-300">Python tool for identifying API secrets and sensitive information in Android
+                applications.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Python</span>
+                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Security</span>
+              </div>
+              <a href="https://github.com/viralvaghela/netguard"
+                class="mt-4 inline-flex items-center text-sm text-primary-400 hover:text-primary-300">
+                View Source Code
+                <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-12 text-center">
+            <a href="https://github.com/viralvaghela"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition">
+              View More Projects
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </htmlCode>
+</element>
+<element id="5c4f78e2-365f-4d58-a540-adbec5ed090a" data-section-id="5c4f78e2-365f-4d58-a540-adbec5ed090a">
+
+  <htmlCode>
+    <div id="root">
+      <section id="skills" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
+            Skills & Expertise
+          </h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Technical Skills -->
+            <div>
+              <h3 class="text-xl font-bold text-white mb-6">Technical Skills</h3>
+
+              <!-- Frameworks/Libraries -->
+              <div class="mb-8">
+                <h4 class="text-lg font-semibold text-primary-400 mb-4">Frameworks & Libraries</h4>
+                <div class="flex flex-wrap gap-3">
+                  <div class="group relative">
+                    <div
+                      class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:border-primary-500 transition-all">
+                      <span class="text-gray-300">Flutter</span>
+                      <div class="w-full h-1 bg-gray-700 mt-2 rounded-full overflow-hidden">
+                        <div class="w-[90%] h-full bg-primary-500 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group relative">
+                    <div
+                      class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:border-primary-500 transition-all">
+                      <span class="text-gray-300">Django</span>
+                      <div class="w-full h-1 bg-gray-700 mt-2 rounded-full overflow-hidden">
+                        <div class="w-[85%] h-full bg-primary-500 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group relative">
+                    <div
+                      class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:border-primary-500 transition-all">
+                      <span class="text-gray-300">Bootstrap</span>
+                      <div class="w-full h-1 bg-gray-700 mt-2 rounded-full overflow-hidden">
+                        <div class="w-[80%] h-full bg-primary-500 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Programming Languages -->
+              <div class="mb-8">
+                <h4 class="text-lg font-semibold text-primary-400 mb-4">Programming Languages</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">C/C++</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Java</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Python</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">JavaScript</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">PHP</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Dart</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tools & Technologies -->
+            <div>
+              <h3 class="text-xl font-bold text-white mb-6">Tools & Technologies</h3>
+
+              <!-- Security Tools -->
+              <div class="mb-8">
+                <h4 class="text-lg font-semibold text-primary-400 mb-4">Security Tools</h4>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Burp Suite Pro</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">SQLMap</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">OWASP ZAP</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Jadx</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Development Tools -->
+              <div class="mb-8">
+                <h4 class="text-lg font-semibold text-primary-400 mb-4">Development Tools</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">VS Code</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Android Studio</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">IntelliJ</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">GitHub</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Postman</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Database & OS -->
+              <div>
+                <h4 class="text-lg font-semibold text-primary-400 mb-4">Database & Operating Systems</h4>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">MySQL</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Firebase</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">MongoDB</span>
+                  </div>
+                  <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                    <span class="text-gray-300">Kali Linux</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="mt-16">
+            <h3 class="text-xl font-bold text-white mb-6">Notable Achievements</h3>
+            <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+              <p class="text-gray-300">Found Security vulnerabilities in major tech companies including:</p>
+              <div class="mt-4 flex flex-wrap gap-3">
+                <a href="#"
+                  class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Vodafone</a>
+                <a href="#"
+                  class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">LeetCode</a>
+                <a href="#"
+                  class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Shine</a>
+                <a href="#"
+                  class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Airtel</a>
+                <a href="#"
+                  class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Cambridge
+                  University</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </htmlCode>
+</element>
+<element id="e2824111-77db-418a-9694-5f7eba49fb63" data-section-id="e2824111-77db-418a-9694-5f7eba49fb63">
+
+  <htmlCode>
+    <div id="root">
+      <section id="achievements" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
+            Achievements & Recognition
+          </h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Security Achievements -->
+            <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
+              <h3 class="text-xl font-bold text-white mb-6">Security Research Recognition</h3>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                  <svg class="h-6 w-6 text-primary-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <div>
+                    <h4 class="text-lg font-semibold text-primary-400">Major Company Vulnerabilities</h4>
+                    <p class="text-gray-300 mt-2">Found and reported critical security vulnerabilities in:</p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Vodafone</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Airtel</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">LeetCode</span>
+                      <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Shine</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
+              <h3 class="text-xl font-bold text-white mb-6">Professional Certifications</h3>
+              <div class="space-y-6">
+                <div class="flex items-start space-x-3">
+                  <svg class="h-6 w-6 text-primary-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                  <div>
+                    <a href="#" class="text-lg font-semibold text-primary-400 hover:text-primary-300">Advanced
+                      Techniques for Ethical Hacking</a>
+                    <p class="text-gray-300 mt-1">LinkedIn Learning</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="h-6 w-6 text-primary-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                  <div>
+                    <a href="#" class="text-lg font-semibold text-primary-400 hover:text-primary-300">FullStack Django
+                      Developer</a>
+                    <p class="text-gray-300 mt-1">LearnCodeOnline (LCO)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
+              <div class="text-4xl font-bold text-primary-400">30+</div>
+              <div class="mt-2 text-gray-300">Organizations</div>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
+              <div class="text-4xl font-bold text-primary-400">100K+</div>
+              <div class="mt-2 text-gray-300">Students Reached</div>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
+              <div class="text-4xl font-bold text-primary-400">140+</div>
+              <div class="mt-2 text-gray-300">Package Likes</div>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
+              <div class="text-4xl font-bold text-primary-400">84%</div>
+              <div class="mt-2 text-gray-300">Package Popularity</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </htmlCode>
+</element>
+<element id="db1d007f-a10a-4c63-9380-5e6125225982" data-section-id="db1d007f-a10a-4c63-9380-5e6125225982">
+
+  <htmlCode>
+    <div id="root">
+      <section id="education" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
+            Education
+          </h2>
+
+          <div class="space-y-12">
+            <!-- BE Degree -->
+            <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-primary-500 transition-all">
+              <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                <div class="lg:col-span-1">
+                  <h3 class="text-xl font-bold text-white">BE in Computer Science and Engineering</h3>
+                  <div class="mt-2 flex items-center text-primary-400">
+                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Aug 2020 – May 2023</span>
+                  </div>
+                  <div class="mt-2 flex items-center text-gray-300">
+                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>SLTIET, Rajkot</span>
+                  </div>
+                  <div class="mt-2 inline-flex items-center px-3 py-1 bg-primary-900/50 rounded-full">
+                    <span class="text-primary-400 font-semibold">CGPA: 8.06</span>
+                  </div>
+                </div>
+                <div class="mt-6 lg:mt-0 lg:col-span-2">
+                  <h4 class="text-lg font-semibold text-primary-400 mb-4">Relevant Coursework</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">Operating Systems</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">Analysis and Design Of Algorithms</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">Computer Network</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">Databases</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Diploma -->
+            <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-primary-500 transition-all">
+              <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                <div class="lg:col-span-1">
+                  <h3 class="text-xl font-bold text-white">Diploma in Computer Engineering</h3>
+                  <div class="mt-2 flex items-center text-primary-400">
+                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Aug 2016 – June 2019</span>
+                  </div>
+                  <div class="mt-2 flex items-center text-gray-300">
+                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>Government Polytechnic, Bhuj</span>
+                  </div>
+                  <div class="mt-2 inline-flex items-center px-3 py-1 bg-primary-900/50 rounded-full">
+                    <span class="text-primary-400 font-semibold">CGPA: 9.46</span>
+                  </div>
+                </div>
+                <div class="mt-6 lg:mt-0 lg:col-span-2">
+                  <h4 class="text-lg font-semibold text-primary-400 mb-4">Relevant Coursework</h4>
+                  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">C/C++</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">DBMS</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">OS</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">JAVA</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">Networking</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-gray-300">Software Engineering</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </htmlCode>
+</element>
+<element id="a2185826-2d85-4e68-9457-a99fdfd46200" data-section-id="a2185826-2d85-4e68-9457-a99fdfd46200">
+
+  <htmlCode>
+    <div id="root">
+      <section id="contact" class="contact-section">
+        <div class="container">
+          <div class="contact-header">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="title-underline"></div>
+          </div>
+
+          <div class="contact-content">
+            <div class="contact-info">
+              <div class="contact-details">
+                <h3>Contact Information</h3>
+                <p><i class="fas fa-envelope"></i> <a
+                    href="mailto:viralvaghela7109@gmail.com">viralvaghela7109@gmail.com</a></p>
+              </div>
+
+              <div class="social-links">
+                <h3>Connect With Me</h3>
+                <div class="social-icons">
+                  <a href="https://www.linkedin.com/in/viralv/" class="social-icon" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://twitter.com/viral_vaghela_/" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="https://github.com/viralvaghela/" class="social-icon" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="https://stackoverflow.com/users/13090648/viral" class="social-icon"
+                    aria-label="Stack Overflow">
+                    <i class="fab fa-stack-overflow"></i>
+                  </a>
+                  <a href="https://vaghelaviral.medium.com/" class="social-icon" aria-label="Medium">
+                    <i class="fab fa-medium"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-form">
+              <form id="contactForm">
+                <div class="form-group">
+                  <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" name="email" required placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="subject" name="subject" required placeholder="Subject">
+                </div>
+                <div class="form-group">
+                  <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+              </form>
+            </div>
+            <script>
+              document.getElementById('contactForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+
+                if (!name || !email || !subject || !message) {
+                  alert('All fields are required.');
+                  return;
+                }
+
+                const webhookUrl = 'https://discord.com/api/webhooks/1305054734561837067/Gbhe4NeX0YHqdiS6Fxe434R8K6T3_jNsEcvw2tQiApaBDOCq5MTnAhs6ValFBvHVoQde';
+                const payload = {
+                  content: `**Name:** ${name}\n**Email:** ${email}\n**Subject:** ${subject}\n**Message:** ${message}`
+                };
+
+                const lastSent = localStorage.getItem('lastSent');
+                const now = Date.now();
+
+                if (lastSent && now - lastSent < 10000) {
+                  alert('Please wait 10 seconds before sending another message.');
+                  return;
+                }
+
+                fetch(webhookUrl, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+                })
+                  .then(response => {
+                    if (response.ok) {
+                      alert('Message sent successfully!');
+                      localStorage.setItem('lastSent', now);
+                      document.getElementById('contactForm').reset();
+                    } else {
+                      alert('Failed to send message.');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to send message.');
+                  });
+              });
+            </script>
+          </div>
+        </div>
+      </section>
+
       <style>
-        /* Core Animations */
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-          from { transform: translateY(20px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
+        .contact-section {
+          padding: 80px 0;
+          background: #1a1a1a;
+          color: #fff;
         }
 
-        /* Responsive Section Padding */
-        section {
-          padding: clamp(2rem, 5vw, 6.25rem) 0;
-          scroll-margin-top: 5rem;
-        }
-
-        /* Performance Optimizations */
-        img {
-          content-visibility: auto;
-          contain: content;
-        }
-
-        /* Core Layout Classes */
         .container {
-          width: min(100% - 2rem, 75rem);
-          margin-inline: auto;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
         }
 
-        /* Responsive Typography */
-        :root {
-          --fluid-min-width: 320;
-          --fluid-max-width: 1140;
-          --fluid-min-size: 16;
-          --fluid-max-size: 18;
-          --fluid-min-scale: 1.2;
-          --fluid-max-scale: 1.333;
+        .contact-header {
+          text-align: center;
+          margin-bottom: 50px;
         }
 
-        /* Add smooth scrolling only if user hasn't requested reduced motion */
-        @media (prefers-reduced-motion: no-preference) {
-          html {
-            scroll-behavior: smooth;
+        .section-title {
+          font-size: 2.5rem;
+          margin-bottom: 20px;
+          color: #00ff88;
+        }
+
+        .title-underline {
+          width: 80px;
+          height: 4px;
+          background: #00ff88;
+          margin: 0 auto;
+        }
+
+        .contact-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 50px;
+        }
+
+        .contact-info {
+          padding: 30px;
+        }
+
+        .contact-details h3,
+        .social-links h3 {
+          color: #00ff88;
+          margin-bottom: 20px;
+        }
+
+        .contact-details p {
+          margin: 10px 0;
+        }
+
+        .social-icons {
+          display: flex;
+          gap: 15px;
+        }
+
+        .social-icon {
+          color: #fff;
+          font-size: 24px;
+          transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+          color: #00ff88;
+        }
+
+        .contact-form {
+          background: #2a2a2a;
+          padding: 30px;
+          border-radius: 10px;
+        }
+
+        .form-group {
+          margin-bottom: 20px;
+        }
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 12px;
+          background: #333;
+          border: none;
+          border-radius: 5px;
+          color: #fff;
+        }
+
+        textarea {
+          height: 150px;
+          resize: vertical;
+        }
+
+        .submit-btn {
+          width: 100%;
+          padding: 15px;
+          background: #00ff88;
+          color: #1a1a1a;
+          border: none;
+          border-radius: 5px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+          background: #00cc6a;
+        }
+
+        @media (max-width: 768px) {
+          .contact-content {
+            grid-template-columns: 1fr;
           }
         }
       </style>
+    </div>
+  </htmlCode>
+</element>
+<element id="6fab8347-1309-48b1-a50b-e38c1131c9e5" data-section-id="6fab8347-1309-48b1-a50b-e38c1131c9e5">
 
-      <!-- Enhanced Image Handler -->
-      <script>
-        // Lazy loading and error handling for images
-        document.addEventListener('DOMContentLoaded', () => {
-          const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                  img.src = img.dataset.src;
-                  img.removeAttribute('data-src');
-                  observer.unobserve(img);
-                }
-              }
-            });
-          }, {
-            rootMargin: '50px 0px',
-            threshold: 0.01
-          });
+  <htmlCode>
+    <div id="root">
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Viral Vaghela</h3>
+            <p>Security Researcher | Software Developer | Tech Geek</p>
+          </div>
 
-          const loadImage = (img) => {
-            if ('loading' in HTMLImageElement.prototype) {
-              img.loading = 'lazy';
-            }
-            
-            // Enhanced error handling
-            img.onerror = () => {
-              const width = img.getAttribute('width') || img.clientWidth || 300;
-              const height = img.getAttribute('height') || img.clientHeight || 200;
-              img.src = `https://placehold.co/${width}x${height}/DEDEDE/555555?text=Image+Unavailable`;
-              img.alt = 'Image unavailable';
-              img.classList.add('error-image');
-            };
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#aboutme">About Me</a></li>
+              <li><a href="#work_experience">Experience</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#education">Education</a></li>
+            </ul>
+          </div>
 
-            if (img.dataset.src) {
-              imageObserver.observe(img);
-            }
-          };
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/viralv/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://twitter.com/viral_vaghela_/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://github.com/viralvaghela/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://stackoverflow.com/users/13090648/viral" aria-label="Stack Overflow"><i
+                  class="fab fa-stack-overflow"></i></a>
+              <a href="https://vaghelaviral.medium.com/" aria-label="Medium"><i class="fab fa-medium"></i></a>
+            </div>
+          </div>
+        </div>
 
-          // Process existing images
-          document.querySelectorAll('img[data-src]').forEach(loadImage);
+        <div class="footer-bottom">
+          <p>&copy; 2024 Viral Vaghela. All rights reserved.</p>
+          <p class="made-with">Made with <span class="heart">❤️</span> in India</p>
+        </div>
+      </footer>
 
-          // Watch for new images
-          new MutationObserver((mutations) => {
-            mutations.forEach(mutation => {
-              mutation.addedNodes.forEach(node => {
-                if (node.nodeType === 1 && node.tagName === 'IMG') {
-                  loadImage(node);
-                }
-                if (node.nodeType === 1) {
-                  node.querySelectorAll('img[data-src]').forEach(loadImage);
-                }
-              });
-            });
-          }).observe(document.body, {
-            childList: true,
-            subtree: true
-          });
-        });
-
-        // Performance monitoring
-        if ('performance' in window) {
-          window.addEventListener('load', () => {
-            const timing = performance.getEntriesByType('navigation')[0];
-            console.log(`Page load time: ${timing.loadEventEnd - timing.navigationStart}ms`);
-          });
+      <style>
+        .footer {
+          background: #1a1a1a;
+          color: #ffffff;
+          padding: 60px 0 20px;
+          margin-top: 80px;
         }
-      </script>
-   </head>
-   <body class="antialiased leading-normal text-gray-900 bg-white dark:bg-gray-900 dark:text-white">
-      <div id="page-wrapper" class="">
-         <main class="">
-           <!-- Content will be injected here -->
-         </main>
-      </div>
-   </body>
-</html><element id="8bb79062-1d74-4cc9-8f1e-1bb62610211e" data-section-id="8bb79062-1d74-4cc9-8f1e-1bb62610211e">
 
-<htmlCode>
-<!--- Tailwind Config --->
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
-      colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe', 
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-        },
-      },
-      animation: {
-        'fade-in': 'fadeIn 1s ease-in',
-        'slide-up': 'slideUp 0.5s ease-out',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
+          padding: 0 20px;
         }
-      }
-    },
-  },
-}
-</script>
 
-<div id="root">
-  <!-- Navbar -->
-  <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex-shrink-0">
-          <a href="#" class="text-white font-bold text-xl">Viral Vaghela</a>
-        </div>
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-4">
-            <a href="#aboutme" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">About</a>
-            <a href="#work_experience" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Experience</a>
-            <a href="#projects" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Projects</a>
-            <a href="#skills" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Skills</a>
-            <a href="#education" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Education</a>
-            <a href="#contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
-          </div>
-        </div>
-      </div>
+        .footer-section h3 {
+          color: #00ff88;
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        .footer-section ul li {
+          margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+          color: #ffffff;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+          color: #00ff88;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 15px;
+        }
+
+        .social-links a {
+          color: #ffffff;
+          font-size: 1.5rem;
+          transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+          color: #00ff88;
+        }
+
+        .footer-bottom {
+          text-align: center;
+          margin-top: 40px;
+          padding-top: 20px;
+          border-top: 1px solid #333;
+        }
+
+        .made-with {
+          margin-top: 10px;
+          font-size: 0.9rem;
+        }
+
+        .heart {
+          color: #ff0000;
+          animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+
+          50% {
+            transform: scale(1.2);
+          }
+
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+
+          .social-links {
+            justify-content: center;
+          }
+        }
+      </style>
     </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <div class="relative bg-gray-900 h-screen">
-    <div class="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900"></div>
-    
-    <div class="relative max-w-7xl mx-auto pt-32 px-4 sm:px-6 lg:px-8 h-full flex items-center">
-      <div class="text-center sm:text-left animate-fade-in">
-        <h1 class="text-4xl sm:text-6xl font-bold text-white mb-6">
-          <span class="block">Security Researcher &</span>
-          <span class="block text-primary-400">Software Developer</span>
-        </h1>
-        
-        <p class="mt-3 text-lg sm:text-xl text-gray-300 max-w-2xl animate-slide-up">
-          Tech Geek 💻 | Penetration Tester 🕵️‍♀️ | Security Researcher | Software developer 🚀
-        </p>
-        
-        <div class="mt-8 flex flex-wrap gap-4 justify-center sm:justify-start">
-          <a href="#contact" class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition md:text-lg">
-            Get In Touch
-          </a>
-          <a href="#projects" class="px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-white hover:bg-gray-800 transition md:text-lg">
-            View Projects
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</htmlCode></element><element id="a4bcbf29-c4c9-40ba-b5d5-81c93ed36fe9" data-section-id="a4bcbf29-c4c9-40ba-b5d5-81c93ed36fe9">
-
-<htmlCode>
-<div id="root">
-  <section id="aboutme" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-        <div class="relative">
-          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-8">
-            About Me
-          </h2>
-          <div class="mt-3 text-lg text-gray-300 space-y-6">
-            <p class="animate-fade-in">
-              Hi 👋, My name is Viral Vaghela, Offensive Security Researcher at Zscaler, programmer and mobile app developer from India
-            </p>
-            
-            <div class="p-4 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700 animate-slide-up">
-              <p>
-                Acknowledged By Cambridge University, Vodafone, Airtel, GTU and 30+ organizations. You can checkout my openbugbounty profile 
-                <a href="https://www.openbugbounty.org/researchers/Codingboy" class="text-primary-400 hover:text-primary-300 transition">CodingBoy</a>
-              </p>
-            </div>
-
-            <p class="animate-fade-in">
-              I am also creating content about Tech, Programming, and Security on my Instagram page 
-              <a href="https://instagram.com/viral_codes" class="text-primary-400 hover:text-primary-300 transition">@viral_codes</a> 
-              and helping more than <strong class="text-white">100K+ students.</strong>
-            </p>
-          </div>
-
-          <div class="mt-10 flex gap-4">
-            <div class="text-center p-4 bg-gray-800/30 rounded-lg border border-gray-700">
-              <div class="text-3xl font-bold text-primary-400">30+</div>
-              <div class="text-sm text-gray-400">Organizations</div>
-            </div>
-            <div class="text-center p-4 bg-gray-800/30 rounded-lg border border-gray-700">
-              <div class="text-3xl font-bold text-primary-400">100K+</div>
-              <div class="text-sm text-gray-400">Students</div>
-            </div>
-            <div class="text-center p-4 bg-gray-800/30 rounded-lg border border-gray-700">
-              <div class="text-3xl font-bold text-primary-400">5+</div>
-              <div class="text-sm text-gray-400">Years Experience</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-12 lg:mt-0">
-          <div class="space-y-6 bg-gray-800/30 p-8 rounded-xl border border-gray-700">
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-medium text-white">Security Research</h3>
-                <p class="text-gray-400">Specialized in vulnerability assessment and penetration testing</p>
-              </div>
-            </div>
-
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-medium text-white">Development</h3>
-                <p class="text-gray-400">Mobile app development and open source contributions</p>
-              </div>
-            </div>
-
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-medium text-white">Content Creation</h3>
-                <p class="text-gray-400">Tech education and security awareness content</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</htmlCode></element><element id="c9dac189-d1cd-4ba2-9b54-bb1fc46b7726" data-section-id="c9dac189-d1cd-4ba2-9b54-bb1fc46b7726">
-
-<htmlCode>
-<div id="root">
-  <section id="work_experience" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
-        Work Experience
-      </h2>
-
-      <div class="space-y-16">
-        <!-- Zscaler -->
-        <div class="relative pl-8 sm:pl-32 py-6 group">
-          <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
-            <div class="flex items-center mb-4 sm:mb-0">
-              <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
-              <span class="text-primary-400 font-semibold">Jan 2024 - Present</span>
-            </div>
-            <div class="sm:ml-28">
-              <h3 class="text-xl font-bold text-white mb-2">Security Researcher at Zscaler</h3>
-              <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                <ul class="space-y-4 text-gray-300">
-                  <li class="flex items-start">
-                    <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Conducted Vulnerability Assessment and Penetration Testing (VAPT) on Web applications, APIs, and hosts</span>
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Executed red team exercises, including Phishing and social engineering attacks</span>
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Engaged in security research activities and product analysis</span>
-                  </li>
-                </ul>
-                <div class="mt-4 flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Offensive Security</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Red Team</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">AWS</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Infra Testing</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bug Bounty Hunter -->
-        <div class="relative pl-8 sm:pl-32 py-6 group">
-          <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
-            <div class="flex items-center mb-4 sm:mb-0">
-              <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
-              <span class="text-primary-400 font-semibold">2022 - 2024</span>
-            </div>
-            <div class="sm:ml-28">
-              <h3 class="text-xl font-bold text-white mb-2">Bug Bounty Hunter</h3>
-              <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                <p class="text-gray-300 mb-4">Acknowledged By Cambridge University, and found security vulnerabilities in Vodafone, Airtel, LeetCode, Shine, GTU and many other organizations</p>
-                <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">VAPT</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">SAST</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">DAPT</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Mobile Testing</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Web Testing</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">API Testing</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Finlegal Internship -->
-        <div class="relative pl-8 sm:pl-32 py-6 group">
-          <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
-            <div class="flex items-center mb-4 sm:mb-0">
-              <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
-              <span class="text-primary-400 font-semibold">Sept 2022 - Dec 2022</span>
-            </div>
-            <div class="sm:ml-28">
-              <h3 class="text-xl font-bold text-white mb-2">Security Engineering Intern at Finlegal Pune</h3>
-              <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                <ul class="space-y-4 text-gray-300">
-                  <li class="flex items-start">
-                    <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Testing and finding security vulnerabilities in in-house products</span>
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="h-6 w-6 text-primary-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Using Burp suite, Owasp Zap, SQL Map and other tools for pentesting</span>
-                  </li>
-                </ul>
-                <div class="mt-4 flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Vulnerability Assessment</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Web Application Security</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Penetration Testing</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Microsoft Internship -->
-        <div class="relative pl-8 sm:pl-32 py-6 group">
-          <div class="flex flex-col sm:flex-row items-start mb-1 group-hover:text-primary-400 transition-all">
-            <div class="flex items-center mb-4 sm:mb-0">
-              <div class="h-1 w-24 bg-primary-500 absolute left-0 top-8 sm:left-0 hidden sm:block"></div>
-              <span class="text-primary-400 font-semibold">Oct 2021 - Dec 2021</span>
-            </div>
-            <div class="sm:ml-28">
-              <h3 class="text-xl font-bold text-white mb-2">Future Ready Talent Virtual Internship Microsoft</h3>
-              <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                <p class="text-gray-300 mb-4">Learned about Microsoft Cloud Platform, Azure's Fundamentals, and Administration. Data Analysis, AI Fundamentals.</p>
-                <div class="mt-4">
-                  <h4 class="text-white font-semibold mb-2">Project: Book Store Web Application</h4>
-                  <ul class="space-y-2 text-gray-300">
-                    <li>• Search and find books and place orders</li>
-                    <li>• Admin dashboard with CRUD operations</li>
-                    <li>• User tracking and record management</li>
-                  </ul>
-                  <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">HTML</span>
-                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">CSS</span>
-                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">JavaScript</span>
-                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">PHP</span>
-                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Azure</span>
-                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">MySQL</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-</div>
-</htmlCode></element><element id="86ed8e2e-0d88-4119-b9aa-487c36b471d7" data-section-id="86ed8e2e-0d88-4119-b9aa-487c36b471d7">
-
-<htmlCode>
-<div id="root">
-  <section id="projects" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
-        Featured Projects
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Flutter Insta -->
-        <div class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
-          <div class="flex justify-between items-start">
-            <h3 class="text-xl font-bold text-white">Flutter Insta Package</h3>
-            <a href="https://pub.dev/packages/flutter_insta" class="text-primary-400 hover:text-primary-300">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-          <p class="mt-4 text-gray-300">Get Instagram user's details such as profile picture URL, followers count, following count, bio, and download reels video.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Flutter</span>
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Dart</span>
-          </div>
-          <div class="mt-4 text-primary-400">140+ Likes & 84% popularity on pub.dev</div>
-          <a href="https://github.com/viralvaghela/flutter_insta" class="mt-4 inline-flex items-center text-sm text-primary-400 hover:text-primary-300">
-            View Source Code
-            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-
-        <!-- Cyber Cop -->
-        <div class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
-          <div class="flex justify-between items-start">
-            <h3 class="text-xl font-bold text-white">Cyber Cop</h3>
-            <a href="https://play.google.com/store/apps/details?id=com.tools.cybercop" class="text-primary-400 hover:text-primary-300">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-          <p class="mt-4 text-gray-300">Mobile App for Cyber Crime Investigation. Get device info, location tracking, and dark web data analysis.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Flutter</span>
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">PHP</span>
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">AWS</span>
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Firebase</span>
-          </div>
-        </div>
-
-        <!-- Secret Finder -->
-        <div class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
-          <div class="flex justify-between items-start">
-            <h3 class="text-xl font-bold text-white">Secret Finder</h3>
-            <a href="https://github.com/viralvaghela/secret-finder" class="text-primary-400 hover:text-primary-300">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-          <p class="mt-4 text-gray-300">Python tool for identifying hard-coded API secrets, tokens, and sensitive information in Android app files.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Python</span>
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Security</span>
-          </div>
-          <a href="https://github.com/viralvaghela/secret-finder" class="mt-4 inline-flex items-center text-sm text-primary-400 hover:text-primary-300">
-            View Source Code
-            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-
-        <!-- Netguard -->
-        <div class="group bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-primary-500 transition-all duration-300">
-          <div class="flex justify-between items-start">
-            <h3 class="text-xl font-bold text-white">Netguard</h3>
-            <a href="https://github.com/viralvaghela/netguard" class="text-primary-400 hover:text-primary-300">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-          <p class="mt-4 text-gray-300">Python tool for identifying API secrets and sensitive information in Android applications.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Python</span>
-            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Security</span>
-          </div>
-          <a href="https://github.com/viralvaghela/netguard" class="mt-4 inline-flex items-center text-sm text-primary-400 hover:text-primary-300">
-            View Source Code
-            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href="https://github.com/viralvaghela" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition">
-          View More Projects
-          <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
-</div>
-</htmlCode></element><element id="5c4f78e2-365f-4d58-a540-adbec5ed090a" data-section-id="5c4f78e2-365f-4d58-a540-adbec5ed090a">
-
-<htmlCode>
-<div id="root">
-  <section id="skills" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
-        Skills & Expertise
-      </h2>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Technical Skills -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-6">Technical Skills</h3>
-          
-          <!-- Frameworks/Libraries -->
-          <div class="mb-8">
-            <h4 class="text-lg font-semibold text-primary-400 mb-4">Frameworks & Libraries</h4>
-            <div class="flex flex-wrap gap-3">
-              <div class="group relative">
-                <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:border-primary-500 transition-all">
-                  <span class="text-gray-300">Flutter</span>
-                  <div class="w-full h-1 bg-gray-700 mt-2 rounded-full overflow-hidden">
-                    <div class="w-[90%] h-full bg-primary-500 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="group relative">
-                <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:border-primary-500 transition-all">
-                  <span class="text-gray-300">Django</span>
-                  <div class="w-full h-1 bg-gray-700 mt-2 rounded-full overflow-hidden">
-                    <div class="w-[85%] h-full bg-primary-500 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="group relative">
-                <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:border-primary-500 transition-all">
-                  <span class="text-gray-300">Bootstrap</span>
-                  <div class="w-full h-1 bg-gray-700 mt-2 rounded-full overflow-hidden">
-                    <div class="w-[80%] h-full bg-primary-500 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Programming Languages -->
-          <div class="mb-8">
-            <h4 class="text-lg font-semibold text-primary-400 mb-4">Programming Languages</h4>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">C/C++</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Java</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Python</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">JavaScript</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">PHP</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Dart</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tools & Technologies -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-6">Tools & Technologies</h3>
-          
-          <!-- Security Tools -->
-          <div class="mb-8">
-            <h4 class="text-lg font-semibold text-primary-400 mb-4">Security Tools</h4>
-            <div class="grid grid-cols-2 gap-3">
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Burp Suite Pro</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">SQLMap</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">OWASP ZAP</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Jadx</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Development Tools -->
-          <div class="mb-8">
-            <h4 class="text-lg font-semibold text-primary-400 mb-4">Development Tools</h4>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">VS Code</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Android Studio</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">IntelliJ</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">GitHub</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Postman</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Database & OS -->
-          <div>
-            <h4 class="text-lg font-semibold text-primary-400 mb-4">Database & Operating Systems</h4>
-            <div class="grid grid-cols-2 gap-3">
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">MySQL</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Firebase</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">MongoDB</span>
-              </div>
-              <div class="px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                <span class="text-gray-300">Kali Linux</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Achievements -->
-      <div class="mt-16">
-        <h3 class="text-xl font-bold text-white mb-6">Notable Achievements</h3>
-        <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-          <p class="text-gray-300">Found Security vulnerabilities in major tech companies including:</p>
-          <div class="mt-4 flex flex-wrap gap-3">
-            <a href="#" class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Vodafone</a>
-            <a href="#" class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">LeetCode</a>
-            <a href="#" class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Shine</a>
-            <a href="#" class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Airtel</a>
-            <a href="#" class="px-4 py-2 bg-gray-700 rounded-full text-sm text-primary-400 hover:text-primary-300 transition">Cambridge University</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</htmlCode></element><element id="e2824111-77db-418a-9694-5f7eba49fb63" data-section-id="e2824111-77db-418a-9694-5f7eba49fb63">
-
-<htmlCode>
-<div id="root">
-  <section id="achievements" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
-        Achievements & Recognition
-      </h2>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Security Achievements -->
-        <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
-          <h3 class="text-xl font-bold text-white mb-6">Security Research Recognition</h3>
-          <div class="space-y-4">
-            <div class="flex items-start space-x-3">
-              <svg class="h-6 w-6 text-primary-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <div>
-                <h4 class="text-lg font-semibold text-primary-400">Major Company Vulnerabilities</h4>
-                <p class="text-gray-300 mt-2">Found and reported critical security vulnerabilities in:</p>
-                <div class="mt-3 flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Vodafone</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Airtel</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">LeetCode</span>
-                  <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300">Shine</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certifications -->
-        <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
-          <h3 class="text-xl font-bold text-white mb-6">Professional Certifications</h3>
-          <div class="space-y-6">
-            <div class="flex items-start space-x-3">
-              <svg class="h-6 w-6 text-primary-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-              </svg>
-              <div>
-                <a href="#" class="text-lg font-semibold text-primary-400 hover:text-primary-300">Advanced Techniques for Ethical Hacking</a>
-                <p class="text-gray-300 mt-1">LinkedIn Learning</p>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-3">
-              <svg class="h-6 w-6 text-primary-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-              </svg>
-              <div>
-                <a href="#" class="text-lg font-semibold text-primary-400 hover:text-primary-300">FullStack Django Developer</a>
-                <p class="text-gray-300 mt-1">LearnCodeOnline (LCO)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stats -->
-      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
-          <div class="text-4xl font-bold text-primary-400">30+</div>
-          <div class="mt-2 text-gray-300">Organizations</div>
-        </div>
-        <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
-          <div class="text-4xl font-bold text-primary-400">100K+</div>
-          <div class="mt-2 text-gray-300">Students Reached</div>
-        </div>
-        <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
-          <div class="text-4xl font-bold text-primary-400">140+</div>
-          <div class="mt-2 text-gray-300">Package Likes</div>
-        </div>
-        <div class="bg-gray-800/50 rounded-lg p-6 text-center border border-gray-700">
-          <div class="text-4xl font-bold text-primary-400">84%</div>
-          <div class="mt-2 text-gray-300">Package Popularity</div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</htmlCode></element><element id="db1d007f-a10a-4c63-9380-5e6125225982" data-section-id="db1d007f-a10a-4c63-9380-5e6125225982">
-
-<htmlCode>
-<div id="root">
-  <section id="education" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-16">
-        Education
-      </h2>
-
-      <div class="space-y-12">
-        <!-- BE Degree -->
-        <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-primary-500 transition-all">
-          <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-            <div class="lg:col-span-1">
-              <h3 class="text-xl font-bold text-white">BE in Computer Science and Engineering</h3>
-              <div class="mt-2 flex items-center text-primary-400">
-                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Aug 2020 – May 2023</span>
-              </div>
-              <div class="mt-2 flex items-center text-gray-300">
-                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>SLTIET, Rajkot</span>
-              </div>
-              <div class="mt-2 inline-flex items-center px-3 py-1 bg-primary-900/50 rounded-full">
-                <span class="text-primary-400 font-semibold">CGPA: 8.06</span>
-              </div>
-            </div>
-            <div class="mt-6 lg:mt-0 lg:col-span-2">
-              <h4 class="text-lg font-semibold text-primary-400 mb-4">Relevant Coursework</h4>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">Operating Systems</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">Analysis and Design Of Algorithms</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">Computer Network</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">Databases</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Diploma -->
-        <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-primary-500 transition-all">
-          <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-            <div class="lg:col-span-1">
-              <h3 class="text-xl font-bold text-white">Diploma in Computer Engineering</h3>
-              <div class="mt-2 flex items-center text-primary-400">
-                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Aug 2016 – June 2019</span>
-              </div>
-              <div class="mt-2 flex items-center text-gray-300">
-                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>Government Polytechnic, Bhuj</span>
-              </div>
-              <div class="mt-2 inline-flex items-center px-3 py-1 bg-primary-900/50 rounded-full">
-                <span class="text-primary-400 font-semibold">CGPA: 9.46</span>
-              </div>
-            </div>
-            <div class="mt-6 lg:mt-0 lg:col-span-2">
-              <h4 class="text-lg font-semibold text-primary-400 mb-4">Relevant Coursework</h4>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">C/C++</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">DBMS</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">OS</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">JAVA</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">Networking</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-gray-300">Software Engineering</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</htmlCode></element><element id="a2185826-2d85-4e68-9457-a99fdfd46200" data-section-id="a2185826-2d85-4e68-9457-a99fdfd46200">
-
-<htmlCode>
-<div id="root">
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <div class="contact-header">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="title-underline"></div>
-      </div>
-
-      <div class="contact-content">
-        <div class="contact-info">
-          <div class="contact-details">
-            <h3>Contact Information</h3>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:viralvaghela7109@gmail.com">viralvaghela7109@gmail.com</a></p>
-          </div>
-
-          <div class="social-links">
-            <h3>Connect With Me</h3>
-            <div class="social-icons">
-              <a href="https://www.linkedin.com/in/viralv/" class="social-icon" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-              </a>
-              <a href="https://twitter.com/viral_vaghela_/" class="social-icon" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://github.com/viralvaghela/" class="social-icon" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="https://stackoverflow.com/users/13090648/viral" class="social-icon" aria-label="Stack Overflow">
-                <i class="fab fa-stack-overflow"></i>
-              </a>
-              <a href="https://vaghelaviral.medium.com/" class="social-icon" aria-label="Medium">
-                <i class="fab fa-medium"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-form">
-          <form id="contactForm">
-            <div class="form-group">
-              <input type="text" id="name" name="name" required placeholder="Your Name">
-            </div>
-            <div class="form-group">
-              <input type="email" id="email" name="email" required placeholder="Your Email">
-            </div>
-            <div class="form-group">
-              <input type="text" id="subject" name="subject" required placeholder="Subject">
-            </div>
-            <div class="form-group">
-              <textarea id="message" name="message" required placeholder="Your Message"></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .contact-section {
-      padding: 80px 0;
-      background: #1a1a1a;
-      color: #fff;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .contact-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #00ff88;
-    }
-
-    .title-underline {
-      width: 80px;
-      height: 4px;
-      background: #00ff88;
-      margin: 0 auto;
-    }
-
-    .contact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-    }
-
-    .contact-info {
-      padding: 30px;
-    }
-
-    .contact-details h3,
-    .social-links h3 {
-      color: #00ff88;
-      margin-bottom: 20px;
-    }
-
-    .contact-details p {
-      margin: 10px 0;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 15px;
-    }
-
-    .social-icon {
-      color: #fff;
-      font-size: 24px;
-      transition: color 0.3s ease;
-    }
-
-    .social-icon:hover {
-      color: #00ff88;
-    }
-
-    .contact-form {
-      background: #2a2a2a;
-      padding: 30px;
-      border-radius: 10px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      background: #333;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-    }
-
-    textarea {
-      height: 150px;
-      resize: vertical;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 15px;
-      background: #00ff88;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .submit-btn:hover {
-      background: #00cc6a;
-    }
-
-    @media (max-width: 768px) {
-      .contact-content {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</div>
-</htmlCode></element><element id="6fab8347-1309-48b1-a50b-e38c1131c9e5" data-section-id="6fab8347-1309-48b1-a50b-e38c1131c9e5">
-
-<htmlCode>
-<div id="root">
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Viral Vaghela</h3>
-        <p>Security Researcher | Software Developer | Tech Geek</p>
-      </div>
-
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#aboutme">About Me</a></li>
-          <li><a href="#work_experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#education">Education</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Connect</h3>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/viralv/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://twitter.com/viral_vaghela_/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://github.com/viralvaghela/" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://stackoverflow.com/users/13090648/viral" aria-label="Stack Overflow"><i class="fab fa-stack-overflow"></i></a>
-          <a href="https://vaghelaviral.medium.com/" aria-label="Medium"><i class="fab fa-medium"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2024 Viral Vaghela. All rights reserved.</p>
-      <p class="made-with">Made with <span class="heart">❤️</span> in India</p>
-    </div>
-  </footer>
-
-  <style>
-    .footer {
-      background: #1a1a1a;
-      color: #ffffff;
-      padding: 60px 0 20px;
-      margin-top: 80px;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      padding: 0 20px;
-    }
-
-    .footer-section h3 {
-      color: #00ff88;
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 10px;
-    }
-
-    .footer-section ul li a {
-      color: #ffffff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-section ul li a:hover {
-      color: #00ff88;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .social-links a {
-      color: #ffffff;
-      font-size: 1.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .social-links a:hover {
-      color: #00ff88;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #333;
-    }
-
-    .made-with {
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
-
-    .heart {
-      color: #ff0000;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    @media (max-width: 768px) {
-      .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .social-links {
-        justify-content: center;
-      }
-    }
-  </style>
-</div>
-</htmlCode></element>
-                    <div id="page_complete">
-                    <script>
-                        console.log('Page complete');
-                    </script>
-                    </body>
-                    </html>
-                
+  </htmlCode>
+</element>
+<div id="page_complete">
+  <script>
+    console.log('Page complete');
+  </script>
+  </body>
+
+  </html>
