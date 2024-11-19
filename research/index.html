@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Basic SEO Meta Tags -->
+    <meta name="title" content="Research Paper Finder - Search PDFs, DOCs, and DOCX Files">
+    <meta name="description"
+        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and DOCX using Google search.">
+
+    <!-- Open Graph Meta Tags for Link Previews -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://viralvaghela.com">
+    <meta property="og:title" content="Research Paper Finder - Search PDFs, DOCs, and DOCX Files">
+    <meta property="og:description"
+        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and DOCX using Google search.">
+
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://x.com/viral_vaghela_">
+    <meta name="twitter:title" content="Research Paper Finder - Search PDFs, DOCs, and DOCX Files">
+    <meta name="twitter:description"
+        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and DOCX using Google search.">
+
+    <!-- Additional Meta Tags -->
+    <meta name="keywords"
+        content="Research Paper Finder, Google Dork, PDF Search, DOC Search, DOCX Search, File Search Tool">
+    <meta name="author" content="Viral Vaghela">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+
+
+
+
+    <title>Research Paper Finder</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3f51b5;
+            outline: none;
+        }
+
+        .checkbox-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #3f51b5;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #303f9f;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        p {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: auto;
+            background: #3f51b5;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #ffccbc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Research Paper Finder</h1>
+        <input type="text" id="topic" placeholder="Enter a topic..." />
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" value="pdf" class="filetype"> PDF
+            </label>
+            <label>
+                <input type="checkbox" value="doc" class="filetype"> DOC
+            </label>
+            <label>
+                <input type="checkbox" value="docx" class="filetype"> DOCX
+            </label>
+            <label>
+                <input type="checkbox" value="ppt" class="filetype"> PPT
+            </label>
+        </div>
+        <button onclick="searchPaper()">Search Paper</button>
+        <p>Find documents on your topic using Google.</p>
+    </div>
+    <footer>
+        Made with ❤️ by <a href="#">Viral</a>
+    </footer>
+
+    <script>
+        function searchPaper() {
+            const topic = document.getElementById("topic").value.trim();
+            const filetypes = Array.from(document.querySelectorAll(".filetype:checked"))
+                .map(checkbox => checkbox.value);
+
+            if (topic && filetypes.length > 0) {
+                const filetypeQuery = filetypes.map(type => `filetype:${type}`).join("+OR+");
+                const query = `https://www.google.com/search?q=${filetypeQuery}+${encodeURIComponent(topic)}`;
+                window.open(query, "_blank");
+            } else if (!topic) {
+                alert("Please enter a topic.");
+            } else if (filetypes.length === 0) {
+                alert("Please select at least one file type.");
+            }
+        }
+    </script>
+</body>
+
+</html>
