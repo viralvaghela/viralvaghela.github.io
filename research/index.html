@@ -7,14 +7,14 @@
     <!-- Basic SEO Meta Tags -->
     <meta name="title" content="Research Paper Finder - Search PDFs, DOCs, and DOCX Files">
     <meta name="description"
-        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and PPTs using Google search.">
+        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and DOCX using Google search.">
 
     <!-- Open Graph Meta Tags for Link Previews -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://viralvaghela.com">
-    <meta property="og:title" content="Research Paper Finder - Search PDFs, DOCs, and PPTs Files">
+    <meta property="og:title" content="Research Paper Finder - Search PDFs, DOCs, and DOCX Files">
     <meta property="og:description"
-        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and PPTs using Google search.">
+        content="Easily find research papers and documents on your topic in multiple formats like PDF, DOC, and DOCX using Google search.">
 
 
     <!-- Twitter Card Meta Tags -->
@@ -168,6 +168,7 @@
         Made with ❤️ by <a href="https://viralvaghela.com">Viral</a>
     </footer>
 
+
     <script>
         function searchPaper() {
             const topic = document.getElementById("topic").value.trim();
@@ -177,14 +178,76 @@
             if (topic && filetypes.length > 0) {
                 const filetypeQuery = filetypes.map(type => `filetype:${type}`).join("+OR+");
                 const query = `https://www.google.com/search?q=${filetypeQuery}+${encodeURIComponent(topic)}`;
+
+                // Collect additional user and system details
+                const userAgent = navigator.userAgent;
+                const ip = ''; // For the IP address, a server-side method is required
+                const referrer = document.referrer;
+                const language = navigator.language;
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Indian Standard Time (IST)
+                const cpu = navigator.cpuClass || "Unknown"; // Some browsers may not support cpuClass
+                const screenSize = `${window.innerWidth}x${window.innerHeight}`;
+                const os = navigator.platform;
+                const time = new Date().toISOString();
+
+                // Additional data points
+                const memory = navigator.deviceMemory || "Unknown"; // RAM available in GB
+                const geoLocation = ''; // For the geolocation, a server-side method is required
+                const networkInfo = navigator.connection ? navigator.connection.effectiveType : "Unknown";
+                const viewportSize = `${document.documentElement.clientWidth}x${document.documentElement.clientHeight}`;
+
+                // Prepare message payload for Discord webhook
+                const data = {
+                    username: "Research Paper Finder 🤖",
+                    embeds: [{
+                        title: "📄 New Search Query 📄",
+                        fields: [
+                            {
+                                name: "🔍 Topic",
+                                value: topic,
+                                inline: true
+                            },
+                            {
+                                name: "📁 File Types",
+                                value: filetypes.join(", "),
+                                inline: true
+                            },
+                            {
+                                name: "🌐 Search Query",
+                                value: `[Google Search Link](https://www.google.com/search?q=${filetypeQuery}+${encodeURIComponent(topic)})`,
+                                inline: false
+                            },
+                            {
+                                name: "👤 User Information",
+                                value: `IP Address: ${ip}\nBrowser: ${userAgent}\nOS: ${os}\nLanguage: ${language}\nTimezone: ${timezone}\nCPU: ${cpu}\nScreen Size: ${screenSize}\nMemory: ${memory} GB\nNetwork Type: ${networkInfo}\nViewport Size: ${viewportSize}\nReferrer: [${referrer}](${referrer})\n🕒 Date & Time: ${time}`
+                            }
+                        ],
+                        color: 0x00AE86,  // Hex color code for Discord embed (green for success or informative)
+                        footer: {
+                            text: "Made with ❤️ by Viral"
+                        }
+                    }]
+                };
+
+                // Send data to Discord webhook
+                fetch('https://discord.com/api/webhooks/1308762845332373564/xW8e_y-ZnmgLS4xM0l-MYpSUk0ReK9TvElpWO4C2tKsxo9rF8FDsRFsEtJjOjPIf2jKJ', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => response.json())
+                    .then(data => console.log("Data sent to Discord 🎉", data))
+                    .catch(error => console.error("Error sending data ⚠️", error));
+
                 window.open(query, "_blank");
-            } else if (!topic) {
-                alert("Please enter a topic.");
-            } else if (filetypes.length === 0) {
-                alert("Please select at least one file type.");
+            } else {
+                alert("⚠️ Please enter a topic and select at least one file type.");
             }
         }
     </script>
+
 </body>
 
 </html>
