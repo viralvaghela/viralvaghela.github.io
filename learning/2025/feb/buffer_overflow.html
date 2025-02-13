@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Buffer Overflow Exploitation - Learning Documentation">
+  <meta name="theme-color" content="#3B82F6">
+  <title>Buffer Overflow | Viral Vaghela</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            accent: '#8B5CF6',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-white">
+  <nav class="bg-gray-800 p-4 shadow-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-white">Viral Vaghela</a>
+      <a href="learning.html" class="text-gray-300 hover:text-white">Back to Learning</a>
+    </div>
+  </nav>
+
+  <section class="max-w-4xl mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-primary">Buffer Overflow Exploitation</h1>
+    <p class="mt-2 text-gray-300">Exploring stack-based buffer overflow attacks and bypassing security mitigations.</p>
+    <p class="mt-2 text-gray-400">Updated on: <span id="current-date"></span></p>
+  </section>
+
+  <section class="max-w-4xl mx-auto mt-6 p-6 bg-gray-800 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-secondary">Overview</h2>
+    <p class="mt-2 text-gray-300">Buffer overflows occur when a program writes more data into a buffer than it can hold, causing adjacent memory corruption. This can lead to code execution, crashes, or privilege escalation.</p>
+  </section>
+
+  <section class="max-w-4xl mx-auto mt-6 p-6 bg-gray-800 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-secondary">Steps for Exploitation</h2>
+    <ol class="mt-4 space-y-3 list-decimal list-inside text-gray-300">
+      <li>Identify buffer overflow vulnerabilities in a program.</li>
+      <li>Find the exact offset where overflow happens using pattern generation.</li>
+      <li>Overwrite the return address to redirect execution.</li>
+      <li>Inject shellcode or call a function like `system("/bin/sh")`.</li>
+      <li>Bypass security mechanisms like ASLR, NX, and canaries if necessary.</li>
+    </ol>
+  </section>
+
+  <footer class="text-center p-4 mt-10 text-gray-400">
+    &copy; 2024 Viral Vaghela | <a href="learning.html" class="text-primary hover:underline">Back to Learning</a>
+  </footer>
+
+  <script>
+    document.getElementById("current-date").innerText = new Date().toLocaleDateString("en-US", {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+  </script>
+</body>
+</html>

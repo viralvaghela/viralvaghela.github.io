@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Viral Vaghela - Learning Documentation">
+  <meta name="theme-color" content="#3B82F6">
+  <title>Learning | Viral Vaghela</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            accent: '#8B5CF6',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-white">
+  <nav class="bg-gray-800 p-4 shadow-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-white">Viral Vaghela</a>
+      <a href="index.html" class="text-gray-300 hover:text-white">Back to Home</a>
+    </div>
+  </nav>
+
+  <section class="max-w-4xl mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-primary">Learning & Exploration</h1>
+    <p class="mt-2 text-gray-300">Documenting everything I'm learning, exploring, and building.</p>
+    <p class="mt-2 text-gray-400">Updated on: <span id="current-date"></span></p>
+  </section>
+
+  <section class="max-w-4xl mx-auto mt-6 p-6 bg-gray-800 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-secondary">Recent Topics</h2>
+    <ul class="mt-4 space-y-3">
+      <li class="p-4 bg-gray-700 rounded-md">
+        <a href="./2025/feb/buffer_overflow.html" class="block">
+          <h3 class="text-lg font-semibold">Buffer Overflow Exploitation</h3>
+          <p class="text-gray-300 text-sm">Exploring stack-based buffer overflow attacks and bypassing security mitigations.</p>
+        </a>
+      </li>
+      <li class="p-4 bg-gray-700 rounded-md">
+        <a href="golang_red_teaming.html" class="block">
+          <h3 class="text-lg font-semibold">Golang for Red Teaming</h3>
+          <p class="text-gray-300 text-sm">Developing offensive security tools using Golang.</p>
+        </a>
+      </li>
+      <li class="p-4 bg-gray-700 rounded-md">
+        <a href="active_directory_pentesting.html" class="block">
+          <h3 class="text-lg font-semibold">Active Directory Pentesting</h3>
+          <p class="text-gray-300 text-sm">Understanding AD enumeration and attack techniques.</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <footer class="text-center p-4 mt-10 text-gray-400">
+    &copy; 2024 Viral Vaghela | <a href="index.html" class="text-primary hover:underline">Back to Home</a>
+  </footer>
+
+  <script>
+    document.getElementById("current-date").innerText = new Date().toLocaleDateString("en-US", {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+  </script>
+</body>
+</html>
