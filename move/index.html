@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v3Move Reminder</title>
+    <title>4Move Reminder</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -72,7 +72,7 @@
         let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386');
         let trackingInterval;
         let soundPlaying = false;
-        let countdown = 3;
+        let countdown = 180;
         let timerInterval;
         const checkInterval = 1000;
         const minDistanceThreshold = 1;
@@ -165,7 +165,7 @@
         }
 
         function resetTimer() {
-            countdown = 180;
+            countdown = 3;
             updateTimerDisplay();
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
