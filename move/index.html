@@ -6,26 +6,67 @@
     <title>Move Reminder</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            margin: 50px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
         button {
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #ff416c;
+            color: white;
             cursor: pointer;
+            transition: 0.3s ease;
+        }
+        button:hover {
+            background: #ff4b2b;
+        }
+        #status {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: yellow;
         }
     </style>
 </head>
 <body>
-    <h1>Move Reminder App</h1>
+    <h1>🏃 Move Reminder App</h1>
     <p>Press start to begin tracking movement.</p>
-    <button onclick="startTracking()">Start</button>
+    <button onclick="startTracking()">Start Tracking</button>
     <p id="status">Waiting for location...</p>
+    <p id="timer">⏳ Timer: 3:00</p>
+
     <script>
         let initialPosition = null;
-        let alertSound = new Audio('https://www.myinstants.com/media/sounds/alarm.mp3');
+        let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386'); // Alarm sound
         let trackingInterval;
+        let soundPlaying = false;
+        let countdown = 180; // 3 minutes (180 seconds)
+        let timerInterval;
+        const checkInterval = 3000; // Check movement every 3 seconds
 
         function startTracking() {
             requestLocation();
@@ -36,23 +77,11 @@
                 navigator.geolocation.getCurrentPosition(position => {
                     initialPosition = position.coords;
                     document.getElementById('status').innerText = "Tracking started...";
+                    resetTimer();
                     if (trackingInterval) clearInterval(trackingInterval);
-                    trackingInterval = setInterval(checkMovement, 3000); // Check every hour
+                    trackingInterval = setInterval(checkMovement, checkInterval); // Check every 3 seconds
                 }, error => {
-                    if (error.code === error.PERMISSION_DENIED) {
-                        document.getElementById('status').innerText = "Location access denied. Please allow location access and restart tracking.";
-                        setTimeout(() => {
-                            navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
-                                if (permissionStatus.state === 'denied') {
-                                    alert("Location permission is required. Please enable it in your browser settings.");
-                                } else {
-                                    requestLocation();
-                                }
-                            });
-                        }, 5000); // Retry after 5 seconds
-                    } else {
-                        alert("Error getting location. Please try again.");
-                    }
+                    handleLocationError(error);
                 });
             } else {
                 alert("Geolocation is not supported by this browser.");
@@ -64,30 +93,57 @@
                 let currentPosition = position.coords;
                 let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
                                            currentPosition.latitude, currentPosition.longitude);
-                if (distance < 10) {
+
+                if (distance < 30) {
                     triggerAlert();
                 } else {
-                    document.getElementById('status').innerText = "You moved! Resetting timer...";
+                    document.getElementById('status').innerText = "✅ You moved! Timer reset...";
                     initialPosition = currentPosition;
+                    resetTimer();
+                    stopAlert();
                 }
             }, error => {
-                if (error.code === error.PERMISSION_DENIED) {
-                    document.getElementById('status').innerText = "Location access denied. Please allow location access.";
-                    requestLocation();
-                }
+                handleLocationError(error);
             });
         }
 
         function triggerAlert() {
-            document.getElementById('status').innerText = "Move! Walk at least 10 meters.";
-            alertSound.play();
+            document.getElementById('status').innerText = "⚠️ Move! Walk at least 30 meters!";
+            if (!soundPlaying) {
+                alertSound.loop = true;
+                alertSound.play();
+                soundPlaying = true;
+            }
             if (navigator.vibrate) {
                 navigator.vibrate([500, 300, 500]);
             }
         }
 
+        function stopAlert() {
+            alertSound.pause();
+            alertSound.currentTime = 0;
+            soundPlaying = false;
+        }
+
+        function handleLocationError(error) {
+            if (error.code === error.PERMISSION_DENIED) {
+                document.getElementById('status').innerText = "❌ Location access denied! Enable location.";
+                setTimeout(() => {
+                    navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
+                        if (permissionStatus.state === 'denied') {
+                            alert("📍 Location permission is required. Please enable it in your browser settings.");
+                        } else {
+                            requestLocation();
+                        }
+                    });
+                }, 5000);
+            } else {
+                alert("Error getting location. Please try again.");
+            }
+        }
+
         function getDistance(lat1, lon1, lat2, lon2) {
-            let R = 6371e3; // Earth radius in meters
+            let R = 6371e3;
             let φ1 = lat1 * Math.PI / 180;
             let φ2 = lat2 * Math.PI / 180;
             let Δφ = (lat2 - lat1) * Math.PI / 180;
@@ -97,6 +153,26 @@
                     Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
             let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c;
+        }
+
+        function resetTimer() {
+            countdown = 180; // Reset to 3 minutes
+            updateTimerDisplay();
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                countdown -= 1; // Decrease by 1 second
+                updateTimerDisplay();
+                if (countdown <= 0) {
+                    triggerAlert();
+                    clearInterval(timerInterval);
+                }
+            }, 1000); // Decrease every 1 second
+        }
+
+        function updateTimerDisplay() {
+            let minutes = Math.floor(countdown / 60);
+            let seconds = countdown % 60;
+            document.getElementById('timer').innerText = `⏳ Timer: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
         }
     </script>
 </body>
