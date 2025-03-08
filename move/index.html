@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v2Move Reminder</title>
+    <title>v3Move Reminder</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -50,6 +50,12 @@
             margin-top: 10px;
             color: yellow;
         }
+        #distance {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: lightgreen;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +64,7 @@
     <button id="startButton" onclick="startTracking()">Start Tracking</button>
     <p id="status">Waiting for location...</p>
     <p id="timer">⏳ Timer: 3:00</p>
+    <p id="distance">📏 Moved: 0m</p>
 
     <script>
         let initialPosition = null;
@@ -65,7 +72,7 @@
         let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386');
         let trackingInterval;
         let soundPlaying = false;
-        let countdown = 180;
+        let countdown = 3;
         let timerInterval;
         const checkInterval = 1000;
         const minDistanceThreshold = 1;
@@ -100,6 +107,7 @@
                 if (distance >= minDistanceThreshold) {
                     totalDistance += distance;
                     initialPosition = currentPosition;
+                    document.getElementById('distance').innerText = `📏 Moved: ${totalDistance.toFixed(2)}m`;
                 }
                 
                 if (totalDistance >= 30) {
@@ -117,7 +125,7 @@
         }
 
         function triggerAlert() {
-            document.getElementById('status').innerText = `⚠️ Move! Walk 30 meters!`;
+            document.getElementById('status').innerText = `⚠️ Move! Walk 30 meters! Moved: ${totalDistance.toFixed(2)}m`;
             document.getElementById('startButton').innerText = "🚨 Move Now!";
             if (!soundPlaying) {
                 alertSound.loop = true;
