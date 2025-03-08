@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Move Reminder</title>
+    <title>v2Move Reminder</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -24,7 +24,7 @@
         }
         p {
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         button {
             padding: 15px 30px;
@@ -42,7 +42,7 @@
         #status {
             font-size: 20px;
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         #timer {
             font-size: 24px;
@@ -55,22 +55,24 @@
 <body>
     <h1>🏃 Move Reminder App</h1>
     <p>Press start to begin tracking movement.</p>
-    <button onclick="startTracking()">Start Tracking</button>
+    <button id="startButton" onclick="startTracking()">Start Tracking</button>
     <p id="status">Waiting for location...</p>
     <p id="timer">⏳ Timer: 3:00</p>
 
     <script>
         let initialPosition = null;
         let totalDistance = 0;
-        let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386'); // Alarm sound
+        let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386');
         let trackingInterval;
         let soundPlaying = false;
-        let countdown = 180; // 3 minutes (180 seconds)
+        let countdown = 180;
         let timerInterval;
-        const checkInterval = 3000; // Check movement every 3 seconds
+        const checkInterval = 1000;
+        const minDistanceThreshold = 1;
 
         function startTracking() {
-            totalDistance = 0; // Reset total distance
+            totalDistance = 0;
+            document.getElementById('startButton').innerText = "Tracking...";
             requestLocation();
         }
 
@@ -81,10 +83,10 @@
                     document.getElementById('status').innerText = "Tracking started...";
                     resetTimer();
                     if (trackingInterval) clearInterval(trackingInterval);
-                    trackingInterval = setInterval(checkMovement, checkInterval); // Check every 3 seconds
+                    trackingInterval = setInterval(checkMovement, checkInterval);
                 }, error => {
                     handleLocationError(error);
-                });
+                }, { enableHighAccuracy: true });
             } else {
                 alert("Geolocation is not supported by this browser.");
             }
@@ -95,25 +97,28 @@
                 let currentPosition = position.coords;
                 let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
                                            currentPosition.latitude, currentPosition.longitude);
-
-                totalDistance += distance;
-                initialPosition = currentPosition; // Update reference point
-
+                if (distance >= minDistanceThreshold) {
+                    totalDistance += distance;
+                    initialPosition = currentPosition;
+                }
+                
                 if (totalDistance >= 30) {
                     stopAlert();
                     resetTimer();
-                    totalDistance = 0; // Reset distance tracker
+                    totalDistance = 0;
                     document.getElementById('status').innerText = "✅ You moved 30m! Timer restarted...";
+                    document.getElementById('startButton').innerText = "Start Tracking";
                 } else if (countdown === 0) {
-                    triggerAlert(); // Keep buzzing if they haven’t moved 30 meters
+                    triggerAlert();
                 }
             }, error => {
                 handleLocationError(error);
-            });
+            }, { enableHighAccuracy: true });
         }
 
         function triggerAlert() {
-            document.getElementById('status').innerText = `⚠️ Move! Walk 30 meters! Moved: ${totalDistance.toFixed(2)}m`;
+            document.getElementById('status').innerText = `⚠️ Move! Walk 30 meters!`;
+            document.getElementById('startButton').innerText = "🚨 Move Now!";
             if (!soundPlaying) {
                 alertSound.loop = true;
                 alertSound.play();
@@ -133,15 +138,6 @@
         function handleLocationError(error) {
             if (error.code === error.PERMISSION_DENIED) {
                 document.getElementById('status').innerText = "❌ Location access denied! Enable location.";
-                setTimeout(() => {
-                    navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
-                        if (permissionStatus.state === 'denied') {
-                            alert("📍 Location permission is required. Please enable it in your browser settings.");
-                        } else {
-                            requestLocation();
-                        }
-                    });
-                }, 5000);
             } else {
                 alert("Error getting location. Please try again.");
             }
@@ -161,17 +157,17 @@
         }
 
         function resetTimer() {
-            countdown = 180; // Reset to 3 minutes
+            countdown = 180;
             updateTimerDisplay();
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                countdown -= 1; // Decrease by 1 second
+                countdown -= 1;
                 updateTimerDisplay();
                 if (countdown <= 0) {
                     triggerAlert();
                     clearInterval(timerInterval);
                 }
-            }, 1000); // Decrease every 1 second
+            }, 1000);
         }
 
         function updateTimerDisplay() {
