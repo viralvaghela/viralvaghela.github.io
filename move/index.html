@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Move Reminder App</h1>
+    <p>Press start to begin tracking movement.</p>
+    <button onclick="startTracking()">Start</button>
+    <p id="status">Waiting for location...</p>
+    <script>
+        let initialPosition = null;
+        let alertSound = new Audio('https://www.myinstants.com/media/sounds/alarm.mp3');
+        let trackingInterval;
+
+        function startTracking() {
+            requestLocation();
+        }
+
+        function requestLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    initialPosition = position.coords;
+                    document.getElementById('status').innerText = "Tracking started...";
+                    if (trackingInterval) clearInterval(trackingInterval);
+                    trackingInterval = setInterval(checkMovement, 3000); // Check every hour
+                }, error => {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        document.getElementById('status').innerText = "Location access denied. Please allow location access and restart tracking.";
+                        setTimeout(() => {
+                            navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
+                                if (permissionStatus.state === 'denied') {
+                                    alert("Location permission is required. Please enable it in your browser settings.");
+                                } else {
+                                    requestLocation();
+                                }
+                            });
+                        }, 5000); // Retry after 5 seconds
+                    } else {
+                        alert("Error getting location. Please try again.");
+                    }
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function checkMovement() {
+            navigator.geolocation.getCurrentPosition(position => {
+                let currentPosition = position.coords;
+                let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
+                                           currentPosition.latitude, currentPosition.longitude);
+                if (distance < 10) {
+                    triggerAlert();
+                } else {
+                    document.getElementById('status').innerText = "You moved! Resetting timer...";
+                    initialPosition = currentPosition;
+                }
+            }, error => {
+                if (error.code === error.PERMISSION_DENIED) {
+                    document.getElementById('status').innerText = "Location access denied. Please allow location access.";
+                    requestLocation();
+                }
+            });
+        }
+
+        function triggerAlert() {
+            document.getElementById('status').innerText = "Move! Walk at least 10 meters.";
+            alertSound.play();
+            if (navigator.vibrate) {
+                navigator.vibrate([500, 300, 500]);
+            }
+        }
+
+        function getDistance(lat1, lon1, lat2, lon2) {
+            let R = 6371e3; // Earth radius in meters
+            let φ1 = lat1 * Math.PI / 180;
+            let φ2 = lat2 * Math.PI / 180;
+            let Δφ = (lat2 - lat1) * Math.PI / 180;
+            let Δλ = (lon2 - lon1) * Math.PI / 180;
+            let a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                    Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+    </script>
+</body>
+</html>
