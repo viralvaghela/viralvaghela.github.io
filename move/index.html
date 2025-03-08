@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1Move Reminder</title>
+    <title>V2 Move Reminder</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -18,8 +18,14 @@
             justify-content: center;
             align-items: center;
         }
-        h1 { font-size: 28px; margin-bottom: 10px; }
-        p { font-size: 18px; margin-bottom: 10px; }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
         button {
             padding: 15px 30px;
             font-size: 18px;
@@ -30,14 +36,26 @@
             cursor: pointer;
             transition: 0.3s ease;
         }
-        button:hover { background: #ff4b2b; }
-        #status, #timer, #distance {
+        button:hover {
+            background: #ff4b2b;
+        }
+        #status {
             font-size: 20px;
             font-weight: bold;
             margin-top: 10px;
         }
-        #timer { color: yellow; }
-        #distance { color: lightgreen; }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: yellow;
+        }
+        #distance {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: lightgreen;
+        }
     </style>
 </head>
 <body>
@@ -52,49 +70,68 @@
         let initialPosition = null;
         let totalDistance = 0;
         let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386');
-        let trackingInterval, timerInterval;
+        let trackingInterval;
         let soundPlaying = false;
-        let countdown = 180;
+        let countdown = 180; // Initial countdown set to 3 minutes (180 seconds)
+        let timerInterval;
         const checkInterval = 1000;
-        const minDistanceThreshold = 1;
+        const minDistanceThreshold = 5; // Increased threshold to reduce sensitivity
 
         function startTracking() {
             totalDistance = 0;
             document.getElementById('startButton').innerText = "Tracking...";
+            requestLocation();
+        }
+
+        function requestLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(position => {
-                    handleMovement(position);
+                navigator.geolocation.getCurrentPosition(position => {
+                    initialPosition = position.coords;
+                    document.getElementById('status').innerText = "Tracking started...";
+                    resetTimer();
+                    if (trackingInterval) clearInterval(trackingInterval);
+                    trackingInterval = setInterval(checkMovement, checkInterval);
                 }, error => {
                     handleLocationError(error);
                 }, { enableHighAccuracy: true });
             } else {
                 alert("Geolocation is not supported by this browser.");
             }
-            resetTimer();
         }
 
-        function handleMovement(position) {
-            let currentPosition = position.coords;
-            if (!initialPosition) {
-                initialPosition = currentPosition;
-                return;
-            }
-            let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
-                                       currentPosition.latitude, currentPosition.longitude);
-            if (distance >= minDistanceThreshold) {
-                totalDistance += distance;
-                initialPosition = currentPosition;
-                document.getElementById('distance').innerText = `📏 Moved: ${totalDistance.toFixed(2)}m`;
-            }
-            if (totalDistance >= 30) {
-                stopAlert();
-                resetTimer();
-                totalDistance = 0;
-                document.getElementById('status').innerText = "✅ You moved 30m! Timer restarted...";
-                document.getElementById('startButton').innerText = "Start Tracking";
-            } else if (countdown === 0) {
-                triggerAlert();
-            }
+        function checkMovement() {
+            navigator.geolocation.getCurrentPosition(position => {
+                let currentPosition = position.coords;
+                let distance = getDistance(initialPosition.latitude, initialPosition.longitude,
+                                                currentPosition.latitude, currentPosition.longitude);
+                if (distance >= minDistanceThreshold) {
+                    totalDistance += distance;
+                    initialPosition = currentPosition;
+                    document.getElementById('distance').innerText = `📏 Moved: ${totalDistance.toFixed(2)}m`;
+                }
+
+                if (totalDistance >= 30) {
+                    stopAlert();
+                    resetTimer();
+                    totalDistance = 0;
+                    document.getElementById('status').innerText = "✅ You moved 30m! Timer restarted...";
+                    document.getElementById('startButton').innerText = "Start Tracking";
+                } else if (countdown <= 0) {
+                    triggerAlert();
+                     // Distance calculation should continue even after alert is triggered
+                    if (distance >= minDistanceThreshold) {
+                        totalDistance += distance; // Keep calculating distance
+                        initialPosition = currentPosition; // Update initial position
+                        document.getElementById('distance').innerText = `📏 Moved: ${totalDistance.toFixed(2)}m`; //Update display
+                    }
+                }
+                 // Log to check if this function is still running and values after timer reaches zero
+                console.log("checkMovement - Countdown:", countdown, "Distance:", distance.toFixed(2), "Total Distance:", totalDistance.toFixed(2));
+
+
+            }, error => {
+                handleLocationError(error);
+            }, { enableHighAccuracy: true });
         }
 
         function triggerAlert() {
@@ -131,14 +168,14 @@
             let Δφ = (lat2 - lat1) * Math.PI / 180;
             let Δλ = (lon2 - lon1) * Math.PI / 180;
             let a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                    Math.cos(φ1) * Math.cos(φ2) *
-                    Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+                            Math.cos(φ1) * Math.cos(φ2) *
+                            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
             let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c;
         }
 
         function resetTimer() {
-            countdown = 180;
+            countdown = 180; // Reset countdown to 3 minutes (180 seconds)
             updateTimerDisplay();
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
