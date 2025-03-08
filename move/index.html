@@ -61,6 +61,7 @@
 
     <script>
         let initialPosition = null;
+        let totalDistance = 0;
         let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386'); // Alarm sound
         let trackingInterval;
         let soundPlaying = false;
@@ -69,6 +70,7 @@
         const checkInterval = 3000; // Check movement every 3 seconds
 
         function startTracking() {
+            totalDistance = 0; // Reset total distance
             requestLocation();
         }
 
@@ -94,13 +96,16 @@
                 let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
                                            currentPosition.latitude, currentPosition.longitude);
 
-                if (distance < 30) {
-                    triggerAlert();
-                } else {
-                    document.getElementById('status').innerText = "✅ You moved! Timer reset...";
-                    initialPosition = currentPosition;
-                    resetTimer();
+                totalDistance += distance;
+                initialPosition = currentPosition; // Update reference point
+
+                if (totalDistance >= 30) {
                     stopAlert();
+                    resetTimer();
+                    totalDistance = 0; // Reset distance tracker
+                    document.getElementById('status').innerText = "✅ You moved 30m! Timer restarted...";
+                } else if (countdown === 0) {
+                    triggerAlert(); // Keep buzzing if they haven’t moved 30 meters
                 }
             }, error => {
                 handleLocationError(error);
@@ -108,7 +113,7 @@
         }
 
         function triggerAlert() {
-            document.getElementById('status').innerText = "⚠️ Move! Walk at least 30 meters!";
+            document.getElementById('status').innerText = `⚠️ Move! Walk 30 meters! Moved: ${totalDistance.toFixed(2)}m`;
             if (!soundPlaying) {
                 alertSound.loop = true;
                 alertSound.play();
