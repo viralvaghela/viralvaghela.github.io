@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4Move Reminder</title>
+    <title>1Move Reminder</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -18,14 +18,8 @@
             justify-content: center;
             align-items: center;
         }
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        p { font-size: 18px; margin-bottom: 10px; }
         button {
             padding: 15px 30px;
             font-size: 18px;
@@ -36,26 +30,14 @@
             cursor: pointer;
             transition: 0.3s ease;
         }
-        button:hover {
-            background: #ff4b2b;
-        }
-        #status {
+        button:hover { background: #ff4b2b; }
+        #status, #timer, #distance {
             font-size: 20px;
             font-weight: bold;
             margin-top: 10px;
         }
-        #timer {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: yellow;
-        }
-        #distance {
-            font-size: 22px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: lightgreen;
-        }
+        #timer { color: yellow; }
+        #distance { color: lightgreen; }
     </style>
 </head>
 <body>
@@ -70,58 +52,49 @@
         let initialPosition = null;
         let totalDistance = 0;
         let alertSound = new Audio('https://www.fesliyanstudios.com/play-mp3/4386');
-        let trackingInterval;
+        let trackingInterval, timerInterval;
         let soundPlaying = false;
         let countdown = 180;
-        let timerInterval;
         const checkInterval = 1000;
         const minDistanceThreshold = 1;
 
         function startTracking() {
             totalDistance = 0;
             document.getElementById('startButton').innerText = "Tracking...";
-            requestLocation();
-        }
-
-        function requestLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    initialPosition = position.coords;
-                    document.getElementById('status').innerText = "Tracking started...";
-                    resetTimer();
-                    if (trackingInterval) clearInterval(trackingInterval);
-                    trackingInterval = setInterval(checkMovement, checkInterval);
+                navigator.geolocation.watchPosition(position => {
+                    handleMovement(position);
                 }, error => {
                     handleLocationError(error);
                 }, { enableHighAccuracy: true });
             } else {
                 alert("Geolocation is not supported by this browser.");
             }
+            resetTimer();
         }
 
-        function checkMovement() {
-            navigator.geolocation.getCurrentPosition(position => {
-                let currentPosition = position.coords;
-                let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
-                                           currentPosition.latitude, currentPosition.longitude);
-                if (distance >= minDistanceThreshold) {
-                    totalDistance += distance;
-                    initialPosition = currentPosition;
-                    document.getElementById('distance').innerText = `📏 Moved: ${totalDistance.toFixed(2)}m`;
-                }
-                
-                if (totalDistance >= 30) {
-                    stopAlert();
-                    resetTimer();
-                    totalDistance = 0;
-                    document.getElementById('status').innerText = "✅ You moved 30m! Timer restarted...";
-                    document.getElementById('startButton').innerText = "Start Tracking";
-                } else if (countdown === 0) {
-                    triggerAlert();
-                }
-            }, error => {
-                handleLocationError(error);
-            }, { enableHighAccuracy: true });
+        function handleMovement(position) {
+            let currentPosition = position.coords;
+            if (!initialPosition) {
+                initialPosition = currentPosition;
+                return;
+            }
+            let distance = getDistance(initialPosition.latitude, initialPosition.longitude, 
+                                       currentPosition.latitude, currentPosition.longitude);
+            if (distance >= minDistanceThreshold) {
+                totalDistance += distance;
+                initialPosition = currentPosition;
+                document.getElementById('distance').innerText = `📏 Moved: ${totalDistance.toFixed(2)}m`;
+            }
+            if (totalDistance >= 30) {
+                stopAlert();
+                resetTimer();
+                totalDistance = 0;
+                document.getElementById('status').innerText = "✅ You moved 30m! Timer restarted...";
+                document.getElementById('startButton').innerText = "Start Tracking";
+            } else if (countdown === 0) {
+                triggerAlert();
+            }
         }
 
         function triggerAlert() {
@@ -165,7 +138,7 @@
         }
 
         function resetTimer() {
-            countdown = 3;
+            countdown = 180;
             updateTimerDisplay();
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
